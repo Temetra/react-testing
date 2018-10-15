@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 // It is rendered into a different element in index.html
 class Header extends Component {
 	constructor(props) {
-    	super(props)
+		super(props)
 
 		// Where to render this component
 		this.portalTarget = document.querySelector(props.target)
@@ -13,7 +13,7 @@ class Header extends Component {
 		// App ref
 		this.application = props.appInterface
 	}
-	
+
 	shouldComponentUpdate(nextProps) {
 		return (this.props.appState.words !== nextProps.appState.words)
 	}

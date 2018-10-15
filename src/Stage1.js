@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // This is sub-component of StageContainer
 class Stage1 extends Component {
 	constructor(props) {
-    	super(props)
+		super(props)
 
 		// Local state
 		this.state = { localValue: 0, appValue: props.appState.amount }
@@ -14,7 +14,7 @@ class Stage1 extends Component {
 
 	render() {
 		this.application.logTime('Stage1')
-		
+
 		return (
 			<React.Fragment>
 				<h2>Test 1</h2>
@@ -25,15 +25,15 @@ class Stage1 extends Component {
 			</React.Fragment>
 		)
 	}
-	
+
 	incrementLocalValue(event) {
 		let value = this.state.localValue + 1
-		this.setState({localValue:value})
+		this.setState({ localValue: value })
 	}
-	
+
 	incrementAppValue(event) {
 		let amount = this.application.incrementAmount()
-		this.setState({appValue:amount})
+		this.setState({ appValue: amount })
 	}
 }
 

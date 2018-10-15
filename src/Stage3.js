@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // This is sub-component of StageContainer
 class Stage3 extends Component {
 	constructor(props) {
-    	super(props)
+		super(props)
 
 		// Local state
 		this.state = { start: 0, finish: 0, delay: 1000 }
@@ -30,16 +30,16 @@ class Stage3 extends Component {
 	buttonAction(event) {
 		// Simulating a proper async function call, e.g. fetch
 		return Promise.resolve()
-			.then(() => this.setState({ start: 0, finish: 0 }))		
-		 	.then(() => this.buttonActionStarted())
-		 	.then(() => new Promise(resolve => setTimeout(resolve, this.state.delay)))
-		 	.then(() => this.buttonActionFinished())
+			.then(() => this.setState({ start: 0, finish: 0 }))
+			.then(() => this.buttonActionStarted())
+			.then(() => new Promise(resolve => setTimeout(resolve, this.state.delay)))
+			.then(() => this.buttonActionFinished())
 	}
 
 	buttonActionStarted() {
 		this.setState({ start: Date.now() })
 	}
-	
+
 	buttonActionFinished() {
 		this.setState({ finish: Date.now() })
 	}

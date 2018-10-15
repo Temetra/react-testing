@@ -8,14 +8,14 @@ import Stage3 from './Stage3'
 // It is rendered into a different element in index.html
 class StageContainer extends Component {
 	constructor(props) {
-    	super(props)
-		
+		super(props)
+
 		// Where to render this component
 		this.portalTarget = document.querySelector(props.target)
 
 		// App ref
 		this.application = props.appInterface
-		
+
 		// Sub-components
 		this.components = {
 			stage1: (props) => <Stage1 appState={props.appState} appInterface={props.appInterface} />,
@@ -39,10 +39,10 @@ class StageContainer extends Component {
 				{this.getStageComponent(this.props.appState.currentStage)}
 			</React.Fragment>
 		)
-		
+
 		return ReactDOM.createPortal(content, this.portalTarget)
 	}
-	
+
 	getStageComponent(name) {
 		let component = this.components[name]
 		return component(this.props)

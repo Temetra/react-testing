@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // This is sub-component of StageContainer
 class Stage2 extends Component {
 	constructor(props) {
-    	super(props)
+		super(props)
 
 		// Local state
 		this.state = { words: props.appState.words }
@@ -26,7 +26,7 @@ class Stage2 extends Component {
 
 	handleChange(event) {
 		this.application.setWords(event.target.value)
-		this.setState({words:event.target.value})
+		this.setState({ words: event.target.value })
 	}
 }
 

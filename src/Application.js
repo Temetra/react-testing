@@ -7,7 +7,7 @@ class ApplicationInterface {
 	constructor(app) {
 		this.app = app
 	}
-	
+
 	logTime(name) {
 		console.log(`${name} ${Date.now()}`)
 	}
@@ -15,13 +15,13 @@ class ApplicationInterface {
 	setWords(words) {
 		this.app.setState({ words })
 	}
-	
+
 	incrementAmount() {
 		let value = this.app.state.amount + 1
 		this.app.setState({ amount: value })
 		return value
 	}
-	
+
 	setStage(stage) {
 		this.app.setState({ currentStage: stage })
 	}
@@ -29,17 +29,17 @@ class ApplicationInterface {
 
 class Application extends Component {
 	constructor(props) {
-    	super(props)
-		
+		super(props)
+
 		this.state = {
 			words: 'Testing things in React',
 			amount: 0,
 			currentStage: 'stage1',
 		}
-		
+
 		this.interface = new ApplicationInterface(this)
 	}
-	
+
 	render() {
 		this.interface.logTime('Application')
 
