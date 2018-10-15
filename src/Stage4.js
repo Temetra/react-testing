@@ -18,13 +18,16 @@ class Stage4 extends Component {
 	render() {
 		this.application.logTime('Stage3')
 
+		// https://reactjs.org/docs/error-boundaries.html
+		// Async/events not covered by error boundary, so error is captured and throw during render
+		if (this.state.error) throw this.state.error
+
 		return (
 			<React.Fragment>
 				<h2>Test 3</h2>
 				<p>This fetches '{this.filename}', parses the text to JSON, and outputs the data as a list.</p>
 				<p><button onClick={(event) => this.buttonAction(event)}>Begin action</button></p>
 				{this.renderData()}
-				{this.renderError()}
 			</React.Fragment>
 		)
 	}
@@ -32,27 +35,18 @@ class Stage4 extends Component {
 	buttonAction(event) {
 		return fetch(this.filename)
 			.then(response => response.json())
-			.then(json => this.setState({ data: json, error: null }))
+			.then(json => this.setState({ data: json }))
 			.catch(error => this.setState({ data: null, error: error }))
 	}
 
 	renderData() {
-		if (this.state.data) return (
-			<React.Fragment>
-				<ul className="stage4">
-					{this.state.data.map(item => <li key={item.id} className={item.badChoice ? 'strike' : ''}>{item.value} {item.title}</li>)}
-				</ul>
-			</React.Fragment>
-		)
-	}
-
-	renderError() {
-		if (this.state.error) return (
-			<React.Fragment>
-				<p>Error loading {this.filename}:</p>
-				<p>{this.state.error.message}</p>
-			</React.Fragment>
-		)
+			if (this.state.data) return (
+				<React.Fragment>
+					<ul className="stage4">
+						{this.state.data.map(item => <li key={item.id} className={item.badChoice ? 'strike' : ''}>{item.value} {item.title}</li>)}
+					</ul>
+				</React.Fragment>
+			)
 	}
 }
 

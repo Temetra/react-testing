@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import ErrorBoundary from './ErrorBoundary'
 
 // This is sub-component of Application
 // It is rendered into a different element in index.html
@@ -28,9 +29,9 @@ class StageContainer extends Component {
 		this.application.logTime('StageContainer')
 
 		let content = (
-			<React.Fragment>
+			<ErrorBoundary appInterface={this.application}>
 				{this.getStageComponent(this.props.appState.currentStage)}
-			</React.Fragment>
+			</ErrorBoundary>
 		)
 
 		return ReactDOM.createPortal(content, this.portalTarget)
