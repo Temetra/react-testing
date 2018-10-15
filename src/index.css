@@ -13,3 +13,17 @@ box-sizing:border-box;
 width:100%;
 padding:4pt;
 }
+
+ul.stage4 {
+list-style-type:none;
+padding:0;
+margin:0;
+}
+
+ul.stage4 li {
+padding:4pt 0;
+}
+
+ul.stage4 li.strike {
+text-decoration:line-through;
+}
