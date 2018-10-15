@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import Stage1 from './Stage1'
-import Stage2 from './Stage2'
-import Stage3 from './Stage3'
 
 // This is sub-component of Application
 // It is rendered into a different element in index.html
@@ -17,11 +14,7 @@ class StageContainer extends Component {
 		this.application = props.appInterface
 
 		// Sub-components
-		this.components = {
-			stage1: (props) => <Stage1 appState={props.appState} appInterface={props.appInterface} />,
-			stage2: (props) => <Stage2 appState={props.appState} appInterface={props.appInterface} />,
-			stage3: (props) => <Stage3 appState={props.appState} appInterface={props.appInterface} />,
-		}
+		this.components = props.components
 	}
 
 	/* 	Only update if currentStage changes
@@ -45,7 +38,7 @@ class StageContainer extends Component {
 
 	getStageComponent(name) {
 		let component = this.components[name]
-		return component(this.props)
+		if (component) return component(this.props)
 	}
 }
 

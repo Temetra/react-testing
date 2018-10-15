@@ -17,11 +17,7 @@ class Navigation extends Component {
 		this.application = props.appInterface
 
 		// Other data
-		this.stages = [
-			{ name: 'stage1', desc: 'Test 1' },
-			{ name: 'stage2', desc: 'Test 2' },
-			{ name: 'stage3', desc: 'Test 3' },
-		]
+		this.stages = props.stages
 	}
 
 	shouldComponentUpdate(nextProps) {
