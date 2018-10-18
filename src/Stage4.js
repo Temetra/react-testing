@@ -19,7 +19,7 @@ class Stage4 extends Component {
 		this.application.logTime('Stage3')
 
 		// https://reactjs.org/docs/error-boundaries.html
-		// Async/events not covered by error boundary, so error is captured and throw during render
+		// Async/events not covered by error boundary, so error is captured and thrown during render
 		if (this.state.error) throw this.state.error
 
 		return (
