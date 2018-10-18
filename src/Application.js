@@ -20,10 +20,8 @@ class ApplicationInterface {
 		this.app.setState({ words })
 	}
 
-	incrementAmount() {
-		let value = this.app.state.amount + 1
+	setAmount(value) {
 		this.app.setState({ amount: value })
-		return value
 	}
 
 	setStage(stage) {

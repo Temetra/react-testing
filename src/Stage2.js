@@ -25,8 +25,9 @@ class Stage2 extends Component {
 	}
 
 	handleChange(event) {
-		this.application.setWords(event.target.value)
-		this.setState({ words: event.target.value })
+		let value = event.target.value
+		this.setState({ words: value })
+		this.application.setWords(value)
 	}
 }
 

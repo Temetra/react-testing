@@ -32,8 +32,9 @@ class Stage1 extends Component {
 	}
 
 	incrementAppValue(event) {
-		let amount = this.application.incrementAmount()
-		this.setState({ appValue: amount })
+		let value = this.state.appValue + 1
+		this.setState({ appValue: value })
+		this.application.setAmount(value)
 	}
 }
 
