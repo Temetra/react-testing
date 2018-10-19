@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 // This is sub-component of StageContainer
-class Stage3 extends Component {
+class Stage3 extends PureComponent {
 	constructor(props) {
 		super(props)
 

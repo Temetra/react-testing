@@ -1,27 +1,20 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 
 // This is sub-component of Application
 // It is rendered into a different element in index.html
-class Navigation extends Component {
+class Navigation extends PureComponent {
 	constructor(props) {
 		super(props)
 
 		// Where to render this component
 		this.portalTarget = document.querySelector(props.target)
 
-		// Local state
-		this.state = { selectedStage: props.appState.currentStage }
-
 		// App ref
 		this.application = props.appInterface
 
 		// Other data
 		this.stages = props.stages
-	}
-
-	shouldComponentUpdate(nextProps) {
-		return (this.props.appState.currentStage !== nextProps.appState.currentStage)
 	}
 
 	render() {
@@ -33,7 +26,7 @@ class Navigation extends Component {
 					return (
 						<label key={stage.name}>
 							<input type="radio" name="navi" value={stage.name}
-								checked={this.state.selectedStage === stage.name}
+								checked={this.props.currentStage === stage.name}
 								onChange={(event) => this.navChanged(event)} />
 							{stage.desc}
 						</label>
@@ -47,7 +40,6 @@ class Navigation extends Component {
 
 	navChanged(event) {
 		this.application.setStage(event.target.value)
-		this.setState({ selectedStage: event.target.value })
 	}
 }
 

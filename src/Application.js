@@ -6,6 +6,7 @@ import Stage1 from './Stage1'
 import Stage2 from './Stage2'
 import Stage3 from './Stage3'
 import Stage4 from './Stage4'
+import Stage5 from './Stage5'
 
 class ApplicationInterface {
 	constructor(app) {
@@ -27,16 +28,35 @@ class ApplicationInterface {
 	setStage(stage) {
 		this.app.setState({ currentStage: stage })
 	}
+
+	setAddress(line, value) {
+		let address = Object.assign({}, this.app.state.address)
+		address[line] = value
+		this.app.setState({ address: address })
+	}
 }
 
 class Application extends Component {
 	constructor(props) {
 		super(props)
 
+		/* This avoids binding every parent event to itself 
+		   and passing them to child components individually */
+		this.interface = new ApplicationInterface(this)
+
 		this.state = {
 			words: 'Testing things in React',
 			amount: 0,
 			currentStage: 'stage1',
+			address: { 
+				line1: '', 
+				line2: '', 
+				line3: '', 
+				line4: '',
+				locality: '',
+				towncity: '',
+				county: ''
+				}
 		}
 
 		this.stages = [
@@ -44,16 +64,16 @@ class Application extends Component {
 			{ name: 'stage2', desc: 'Test 2' },
 			{ name: 'stage3', desc: 'Test 3' },
 			{ name: 'stage4', desc: 'Test 4' },
+			{ name: 'stage5', desc: 'Test 5' },
 		]
 
 		this.components = {
-			stage1: (props) => <Stage1 appState={props.appState} appInterface={props.appInterface} />,
-			stage2: (props) => <Stage2 appState={props.appState} appInterface={props.appInterface} />,
-			stage3: (props) => <Stage3 appState={props.appState} appInterface={props.appInterface} />,
-			stage4: (props) => <Stage4 appState={props.appState} appInterface={props.appInterface} />,
+			stage1: () => <Stage1 amount={this.state.amount} appInterface={this.interface} />,
+			stage2: () => <Stage2 words={this.state.words} appInterface={this.interface} />,
+			stage3: () => <Stage3 appInterface={this.interface} />,
+			stage4: () => <Stage4 appInterface={this.interface} />,
+			stage5: () => <Stage5 address={this.state.address} appInterface={this.interface} />,
 		}
-
-		this.interface = new ApplicationInterface(this)
 	}
 
 	render() {
@@ -61,9 +81,9 @@ class Application extends Component {
 
 		return (
 			<React.Fragment>
-				<Header target="header" appState={this.state} appInterface={this.interface} />
-				<Navigation target="nav" appState={this.state} appInterface={this.interface} stages={this.stages} />
-				<StageContainer target="section" appState={this.state} appInterface={this.interface} components={this.components} />
+				<Header target="header" words={this.state.words} appInterface={this.interface} />
+				<Navigation target="nav" currentStage={this.state.currentStage} appInterface={this.interface} stages={this.stages} />
+				<StageContainer target="section" currentStage={this.state.currentStage} appInterface={this.interface} components={this.components} />
 			</React.Fragment>
 		)
 	}

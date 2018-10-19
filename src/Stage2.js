@@ -5,9 +5,6 @@ class Stage2 extends Component {
 	constructor(props) {
 		super(props)
 
-		// Local state
-		this.state = { words: props.appState.words }
-
 		// App ref
 		this.application = props.appInterface
 	}
@@ -19,14 +16,13 @@ class Stage2 extends Component {
 			<React.Fragment>
 				<h2>Test 2</h2>
 				<p>This edits text stored in application state, which is also used by the header component.</p>
-				<p><input type="text" className="big" value={this.state.words} onChange={(event) => this.handleChange(event)} /></p>
+				<p><input type="text" className="big" value={this.props.words} onChange={(event) => this.handleChange(event)} /></p>
 			</React.Fragment>
 		)
 	}
 
 	handleChange(event) {
 		let value = event.target.value
-		this.setState({ words: value })
 		this.application.setWords(value)
 	}
 }

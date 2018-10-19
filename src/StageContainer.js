@@ -18,28 +18,21 @@ class StageContainer extends Component {
 		this.components = props.components
 	}
 
-	/* 	Only update if currentStage changes
-		This means sub-components should maintain own state in order 
-		to re-render on interaction, getting data from appInterface */
-	shouldComponentUpdate(nextProps) {
-		return (this.props.appState.currentStage !== nextProps.appState.currentStage)
-	}
-
 	render() {
 		this.application.logTime('StageContainer')
 
 		let content = (
 			<ErrorBoundary appInterface={this.application}>
-				{this.getStageComponent(this.props.appState.currentStage)}
+				{this.getCurrentStageComponent()}
 			</ErrorBoundary>
 		)
 
 		return ReactDOM.createPortal(content, this.portalTarget)
 	}
 
-	getStageComponent(name) {
-		let component = this.components[name]
-		if (component) return component(this.props)
+	getCurrentStageComponent() {
+		let component = this.components[this.props.currentStage]
+		if (component) return component()
 	}
 }
 

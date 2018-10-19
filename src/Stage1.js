@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 // This is sub-component of StageContainer
-class Stage1 extends Component {
+class Stage1 extends PureComponent {
 	constructor(props) {
 		super(props)
 
 		// Local state
-		this.state = { localValue: 0, appValue: props.appState.amount }
+		this.state = { localValue: 0 }
 
 		// App ref
 		this.application = props.appInterface
@@ -21,7 +21,7 @@ class Stage1 extends Component {
 				<p>This edits a local state number, which is lost when the stage changes.</p>
 				<p><button onClick={(event) => this.incrementLocalValue(event)}>Increment local value</button> {this.state.localValue}</p>
 				<p>This edits an app state number, which is retained when the stage changes.</p>
-				<p><button onClick={(event) => this.incrementAppValue(event)}>Increment app value</button> {this.state.appValue}</p>
+				<p><button onClick={(event) => this.incrementAppValue(event)}>Increment app value</button> {this.props.amount}</p>
 			</React.Fragment>
 		)
 	}
@@ -32,8 +32,7 @@ class Stage1 extends Component {
 	}
 
 	incrementAppValue(event) {
-		let value = this.state.appValue + 1
-		this.setState({ appValue: value })
+		let value = this.props.amount + 1
 		this.application.setAmount(value)
 	}
 }
