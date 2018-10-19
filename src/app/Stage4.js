@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import * as Log from './LogTime.js'
+import * as Log from '../lib/LogTime.js'
 
 // This is sub-component of StageContainer
 class Stage4 extends PureComponent {

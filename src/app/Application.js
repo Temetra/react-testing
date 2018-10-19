@@ -1,5 +1,5 @@
 import React from 'react'
-import * as Log from './LogTime.js'
+import * as Log from '../lib/LogTime.js'
 import ApplicationState from './ApplicationState'
 import Header from './Header'
 import Navigation from './Navigation'

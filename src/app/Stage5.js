@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
-import { stringArrayHashCode } from './StringHashCode'
-import * as Log from './LogTime.js'
+import { stringArrayHashCode } from '../lib/StringHashCode'
+import * as Log from '../lib/LogTime.js'
 
 // This is sub-component of StageContainer
 class Stage5 extends PureComponent {
