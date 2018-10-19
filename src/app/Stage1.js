@@ -8,9 +8,6 @@ class Stage1 extends PureComponent {
 
 		// Local state
 		this.state = { localValue: 0 }
-
-		// App ref
-		this.application = props.application
 	}
 
 	render() {

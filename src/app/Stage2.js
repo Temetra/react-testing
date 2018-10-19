@@ -3,13 +3,6 @@ import * as Log from '../lib/LogTime.js'
 
 // This is sub-component of StageContainer
 class Stage2 extends PureComponent {
-	constructor(props) {
-		super(props)
-
-		// App ref
-		this.application = props.application
-	}
-
 	render() {
 		Log.message('Stage2')
 
