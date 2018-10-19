@@ -1,4 +1,5 @@
 import React from 'react'
+import * as Bind from '../lib/Binding'
 import * as Log from '../lib/Logging'
 import ApplicationState from './ApplicationState'
 import Header from './Header'
@@ -31,6 +32,9 @@ class Application extends ApplicationState {
 			stage4: () => <Stage4 />,
 			stage5: () => <Stage5 address={this.state.address} onAddressChange={this.handleAddressChange} />,
 		}
+
+		// Bind event handlers for components
+		Bind.eventHandlers(this, ApplicationState.prototype)
 	}
 
 	render() {

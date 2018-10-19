@@ -19,13 +19,6 @@ export default class ApplicationState extends Component {
 				county: ''
 			}
 		}
-
-		// Bind state event functions to pass as component props
-		// Look for functions that start with 'handle' followed by a capital letter
-		let regex = /handle[A-Z]/
-		Reflect.ownKeys(ApplicationState.prototype).forEach(func => {
-			if (regex.test(func)) this[func] = this[func].bind(this)
-		})
 	}
 
 	handleStageChange(currentStage) {
