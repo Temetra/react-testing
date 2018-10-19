@@ -1,15 +1,30 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
+import { stringArrayHashCode } from './StringHashCode'
 
 // This is sub-component of StageContainer
-class Stage5 extends Component {
+class Stage5 extends PureComponent {
 	constructor(props) {
 		super(props)
 
 		// App ref
 		this.application = props.appInterface
 		
+		// State
+		this.state = { addressHash: this.calculateAddressHash(props.address) }
+		
 		// Event binding
 		this.handleChange = this.handleChange.bind(this)
+	}
+	
+	componentWillReceiveProps(nextProps) {
+		// This updates the component when app state is changed via the dev tools
+		// Dev tool edits send props, but don't remake "immutable" address object?
+		this.setState({ addressHash: this.calculateAddressHash(nextProps.address) })
+	}
+
+	calculateAddressHash(address) {
+		let values = Object.keys(address).map(key => address[key].toString())
+		return stringArrayHashCode(values)
 	}
 
 	render() {
@@ -25,6 +40,7 @@ class Stage5 extends Component {
 				<AddressItem label="Line 4" name="line4" value={this.props.address.line4} onChange={this.handleChange} />
 				<AddressItem label="Town/city" name="towncity" value={this.props.address.towncity} onChange={this.handleChange} />
 				<AddressItem label="County" name="county" value={this.props.address.county} onChange={this.handleChange} />
+				<p>Hash of address lines: {this.state.addressHash}</p>
 			</React.Fragment>
 		)
 	}
@@ -32,7 +48,7 @@ class Stage5 extends Component {
 	handleChange(event) {
 		let name = event.target.name
 		let value = event.target.value
-		this.application.setAddress(name, value)
+		this.application.updateAddress({ [name]: value })
 	}
 }
 

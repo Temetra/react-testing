@@ -29,9 +29,8 @@ class ApplicationInterface {
 		this.app.setState({ currentStage: stage })
 	}
 
-	setAddress(line, value) {
-		let address = Object.assign({}, this.app.state.address)
-		address[line] = value
+	updateAddress(newAddress) {
+		let address = Object.assign({}, this.app.state.address, newAddress)
 		this.app.setState({ address: address })
 	}
 }
@@ -47,7 +46,7 @@ class Application extends Component {
 		this.state = {
 			words: 'Testing things in React',
 			amount: 0,
-			currentStage: 'stage1',
+			currentStage: 'stage5',
 			address: { 
 				line1: '', 
 				line2: '', 
