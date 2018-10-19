@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import * as Log from './LogTime.js'
+import ApplicationState from './ApplicationState'
 import Header from './Header'
 import Navigation from './Navigation'
 import StageContainer from './StageContainer'
@@ -8,44 +9,6 @@ import Stage2 from './Stage2'
 import Stage3 from './Stage3'
 import Stage4 from './Stage4'
 import Stage5 from './Stage5'
-
-class ApplicationState extends Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			currentStage: 'stage1',
-			words: 'Testing things in React',
-			amount: 0,
-			address: { 
-				line1: '', 
-				line2: '', 
-				line3: '', 
-				line4: '',
-				locality: '',
-				towncity: '',
-				county: ''
-				}
-		}
-	}
-	
-	setWords(words) {
-		this.setState({ words })
-	}
-
-	setAmount(value) {
-		this.setState({ amount: value })
-	}
-
-	setStage(stage) {
-		this.setState({ currentStage: stage })
-	}
-
-	setAddress(newAddress) {
-		let address = Object.assign({}, this.state.address, newAddress)
-		this.setState({ address: address })
-	}
-}
 
 class Application extends ApplicationState {
 	constructor(props) {
