@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import * as Log from './LogTime.js'
 
 // This is sub-component of StageContainer
 class Stage1 extends PureComponent {
@@ -9,11 +10,11 @@ class Stage1 extends PureComponent {
 		this.state = { localValue: 0 }
 
 		// App ref
-		this.application = props.appInterface
+		this.application = props.application
 	}
 
 	render() {
-		this.application.logTime('Stage1')
+		Log.message('Stage1')
 
 		return (
 			<React.Fragment>
@@ -33,7 +34,7 @@ class Stage1 extends PureComponent {
 
 	incrementAppValue(event) {
 		let value = this.props.amount + 1
-		this.application.setAmount(value)
+		this.props.onAmountChange(value)
 	}
 }
 

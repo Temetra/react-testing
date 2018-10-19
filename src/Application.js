@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as Log from './LogTime.js'
 import Header from './Header'
 import Navigation from './Navigation'
 import StageContainer from './StageContainer'
@@ -8,45 +9,14 @@ import Stage3 from './Stage3'
 import Stage4 from './Stage4'
 import Stage5 from './Stage5'
 
-class ApplicationInterface {
-	constructor(app) {
-		this.app = app
-	}
-
-	logTime(name) {
-		console.log(`${name} ${Date.now()}`)
-	}
-
-	setWords(words) {
-		this.app.setState({ words })
-	}
-
-	setAmount(value) {
-		this.app.setState({ amount: value })
-	}
-
-	setStage(stage) {
-		this.app.setState({ currentStage: stage })
-	}
-
-	updateAddress(newAddress) {
-		let address = Object.assign({}, this.app.state.address, newAddress)
-		this.app.setState({ address: address })
-	}
-}
-
-class Application extends Component {
+class ApplicationState extends Component {
 	constructor(props) {
 		super(props)
 
-		/* This avoids binding every parent event to itself 
-		   and passing them to child components individually */
-		this.interface = new ApplicationInterface(this)
-
 		this.state = {
+			currentStage: 'stage1',
 			words: 'Testing things in React',
 			amount: 0,
-			currentStage: 'stage5',
 			address: { 
 				line1: '', 
 				line2: '', 
@@ -57,6 +27,29 @@ class Application extends Component {
 				county: ''
 				}
 		}
+	}
+	
+	setWords(words) {
+		this.setState({ words })
+	}
+
+	setAmount(value) {
+		this.setState({ amount: value })
+	}
+
+	setStage(stage) {
+		this.setState({ currentStage: stage })
+	}
+
+	setAddress(newAddress) {
+		let address = Object.assign({}, this.state.address, newAddress)
+		this.setState({ address: address })
+	}
+}
+
+class Application extends ApplicationState {
+	constructor(props) {
+		super(props)
 
 		this.stages = [
 			{ name: 'stage1', desc: 'Test 1' },
@@ -67,22 +60,22 @@ class Application extends Component {
 		]
 
 		this.components = {
-			stage1: () => <Stage1 amount={this.state.amount} appInterface={this.interface} />,
-			stage2: () => <Stage2 words={this.state.words} appInterface={this.interface} />,
-			stage3: () => <Stage3 appInterface={this.interface} />,
-			stage4: () => <Stage4 appInterface={this.interface} />,
-			stage5: () => <Stage5 address={this.state.address} appInterface={this.interface} />,
+			stage1: () => <Stage1 amount={this.state.amount} onAmountChange={(value) => this.setAmount(value)} />,
+			stage2: () => <Stage2 words={this.state.words} onWordsChange={(value) => this.setWords(value)} />,
+			stage3: () => <Stage3 />,
+			stage4: () => <Stage4 />,
+			stage5: () => <Stage5 address={this.state.address} onAddressChange={(value) => this.setAddress(value)} />,
 		}
 	}
 
 	render() {
-		this.interface.logTime('Application')
+		Log.message('Application')
 
 		return (
 			<React.Fragment>
-				<Header target="header" words={this.state.words} appInterface={this.interface} />
-				<Navigation target="nav" currentStage={this.state.currentStage} appInterface={this.interface} stages={this.stages} />
-				<StageContainer target="section" currentStage={this.state.currentStage} appInterface={this.interface} components={this.components} />
+				<Header target="header" words={this.state.words} />
+				<Navigation target="nav" stages={this.stages} currentStage={this.state.currentStage} onStageChange={(value) => this.setStage(value)} />
+				<StageContainer target="section" components={this.components} currentStage={this.state.currentStage} />
 			</React.Fragment>
 		)
 	}

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import * as Log from './LogTime.js'
 
 // This is sub-component of StageContainer
 class Stage4 extends PureComponent {
@@ -8,15 +9,12 @@ class Stage4 extends PureComponent {
 		// Local state
 		this.state = { data: null, error: null }
 
-		// App ref
-		this.application = props.appInterface
-
 		// Other data
 		this.filename = 'res/data.json'
 	}
 
 	render() {
-		this.application.logTime('Stage3')
+		Log.message('Stage3')
 
 		// https://reactjs.org/docs/error-boundaries.html
 		// Async/events not covered by error boundary, so error is captured and thrown during render

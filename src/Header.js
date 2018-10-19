@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
+import * as Log from './LogTime.js'
 
 // This is sub-component of Application
 // It is rendered into a different element in index.html
@@ -9,13 +10,10 @@ class Header extends PureComponent {
 
 		// Where to render this component
 		this.portalTarget = document.querySelector(props.target)
-
-		// App ref
-		this.application = props.appInterface
 	}
 
 	render() {
-		this.application.logTime('Header')
+		Log.message('Header')
 
 		let content = (
 			<React.Fragment>

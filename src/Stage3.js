@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import * as Log from './LogTime.js'
 
 // This is sub-component of StageContainer
 class Stage3 extends PureComponent {
@@ -7,13 +8,10 @@ class Stage3 extends PureComponent {
 
 		// Local state
 		this.state = { start: 0, finish: 0, delay: 1000 }
-
-		// App ref
-		this.application = props.appInterface
 	}
 
 	render() {
-		this.application.logTime('Stage3')
+		Log.message('Stage3')
 
 		return (
 			<React.Fragment>

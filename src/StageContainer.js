@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import ErrorBoundary from './ErrorBoundary'
+import * as Log from './LogTime.js'
 
 // This is sub-component of Application
 // It is rendered into a different element in index.html
@@ -11,18 +12,15 @@ class StageContainer extends Component {
 		// Where to render this component
 		this.portalTarget = document.querySelector(props.target)
 
-		// App ref
-		this.application = props.appInterface
-
 		// Sub-components
 		this.components = props.components
 	}
 
 	render() {
-		this.application.logTime('StageContainer')
+		Log.message('StageContainer')
 
 		let content = (
-			<ErrorBoundary appInterface={this.application}>
+			<ErrorBoundary>
 				{this.getCurrentStageComponent()}
 			</ErrorBoundary>
 		)

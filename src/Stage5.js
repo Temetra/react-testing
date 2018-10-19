@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react'
 import { stringArrayHashCode } from './StringHashCode'
+import * as Log from './LogTime.js'
 
 // This is sub-component of StageContainer
 class Stage5 extends PureComponent {
 	constructor(props) {
 		super(props)
-
-		// App ref
-		this.application = props.appInterface
 		
 		// State
 		this.state = { addressHash: this.calculateAddressHash(props.address) }
@@ -28,7 +26,7 @@ class Stage5 extends PureComponent {
 	}
 
 	render() {
-		this.application.logTime('Stage5')
+		Log.message('Stage5')
 
 		return (
 			<React.Fragment>
@@ -48,7 +46,7 @@ class Stage5 extends PureComponent {
 	handleChange(event) {
 		let name = event.target.name
 		let value = event.target.value
-		this.application.updateAddress({ [name]: value })
+		this.props.onAddressChange({ [name]: value })
 	}
 }
 

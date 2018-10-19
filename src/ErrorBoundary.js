@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import * as Log from './LogTime.js'
 
 export default class ErrorBoundary extends Component {
 	constructor(props) {
 		super(props)
 		this.state = { hasError: false }
-		this.application = props.appInterface
 	}
 
 	componentDidCatch(error, info) {
@@ -13,7 +13,7 @@ export default class ErrorBoundary extends Component {
 
 	render() {
 		if (this.state.hasError) {
-			this.application.logTime('ErrorBoundary')
+			Log.message('ErrorBoundary')
 
 			return (
 				<React.Fragment>

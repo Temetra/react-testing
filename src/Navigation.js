@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
+import * as Log from './LogTime.js'
 
 // This is sub-component of Application
 // It is rendered into a different element in index.html
@@ -10,15 +11,12 @@ class Navigation extends PureComponent {
 		// Where to render this component
 		this.portalTarget = document.querySelector(props.target)
 
-		// App ref
-		this.application = props.appInterface
-
 		// Other data
 		this.stages = props.stages
 	}
 
 	render() {
-		this.application.logTime('Navigation')
+		Log.message('Navigation')
 
 		let content = (
 			<React.Fragment>
@@ -39,7 +37,7 @@ class Navigation extends PureComponent {
 	}
 
 	navChanged(event) {
-		this.application.setStage(event.target.value)
+		this.props.onStageChange(event.target.value)
 	}
 }
 
