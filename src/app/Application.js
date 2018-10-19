@@ -22,12 +22,17 @@ class Application extends ApplicationState {
 			{ name: 'stage5', desc: 'Test 5' },
 		]
 
+		this.onAmountChange = (value) => this.setAmount(value)
+		this.onWordsChange = (value) => this.setWords(value)
+		this.onAddressChange = (value) => this.setAddress(value)
+		this.onStageChange = (value) => this.setStage(value)
+
 		this.components = {
-			stage1: () => <Stage1 amount={this.state.amount} onAmountChange={(value) => this.setAmount(value)} />,
-			stage2: () => <Stage2 words={this.state.words} onWordsChange={(value) => this.setWords(value)} />,
+			stage1: () => <Stage1 amount={this.state.amount} onAmountChange={this.onAmountChange} />,
+			stage2: () => <Stage2 words={this.state.words} onWordsChange={this.onWordsChange} />,
 			stage3: () => <Stage3 />,
 			stage4: () => <Stage4 />,
-			stage5: () => <Stage5 address={this.state.address} onAddressChange={(value) => this.setAddress(value)} />,
+			stage5: () => <Stage5 address={this.state.address} onAddressChange={this.onAddressChange} />,
 		}
 	}
 
@@ -37,7 +42,7 @@ class Application extends ApplicationState {
 		return (
 			<React.Fragment>
 				<Header target="header" words={this.state.words} />
-				<Navigation target="nav" stages={this.stages} currentStage={this.state.currentStage} onStageChange={(value) => this.setStage(value)} />
+				<Navigation target="nav" stages={this.stages} currentStage={this.state.currentStage} onStageChange={this.onStageChange} />
 				<StageContainer target="section" components={this.components} currentStage={this.state.currentStage} />
 			</React.Fragment>
 		)
